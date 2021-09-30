@@ -7,4 +7,4 @@ The teaching platform that we are using is accessible on: https://robo1.nextlab.
 
 Since you're here, make sure you have an active https://github.com/ account.
 
-Make sure you have an active account on: https://codesandbox.io/
+Make sure you have an active account on: https://codesandbox.io/ also.
