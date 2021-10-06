@@ -1,4 +1,4 @@
-## LAB 2 - Introduction to javascript
+## LAB 2 - Introduction to javascript - Work In progress
 
 Since there was a slight change in the structure of the semester, we will not start with HTML/HTTP for the second seminar, instead, we will kick off
 with a introduction to Javascript language.
