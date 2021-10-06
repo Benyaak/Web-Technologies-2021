@@ -1,7 +1,8 @@
 # Web Technologies 2021 - Work in Progress
-Web Technologies EN/RO Public Repository for 1100 & 1090 groups
 
-Configs that I personally use @ work and for personal mattersȘ
+### Web Technologies EN/RO Public Repository for 1100 & 1090 groups
+
+Configs that I personally use @ work and for personal matters:
 
 - Visual Studio Code [ [Download here](https://code.visualstudio.com/Download) ]
     - ESLint extension
