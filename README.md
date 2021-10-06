@@ -10,3 +10,6 @@ Since you're here, make sure you have an active https://github.com/ account.
 Make sure you have an active account on: https://codesandbox.io/ also.
 
 ### S2 - Introduction to Javascript
+
+For your personal development, the best FREE tutorial I recommend is: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/
+
