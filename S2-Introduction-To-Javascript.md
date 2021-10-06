@@ -25,7 +25,15 @@ e. Prototype based -  a style of object-oriented programming in which behaviour 
 
 f. First class functions - This means the language supports passing functions as arguments to other functions, returning them as the values from other functions, and assigning them to variables or storing them in data structures.
 
-#### Data types used in Javascript
+### Javascript Variables
+
+There are 3 ways to declare a JavaScript variable:
+
+Using **var***
+Using **let**
+Using **const**
+
+### Data types used in Javascript
 
 As mentionted above, Javascript has a dynamic type checking system combined with a loosely typed style. 
 Variables in JavaScript are not directly associated with any particular value type, and any variable can be assigned (and re-assigned) values of all types:
@@ -48,3 +56,21 @@ The set of types in the JavaScript language consists of primitive values and obj
   - String type
   - Symbol type
 - Objects (collections of properties)
+
+### How to comment out Javascript code
+
+Single line comments start with ```//```. Any text between ```//``` and the end of the line will be ignored by JavaScript - will not be executed.
+
+Multi-line comments start with ```/*``` and end with ```*/```. Any text between ```/*``` and ```*/``` will be ignored by JavaScript.
+
+Examples below: 
+```javascript
+// This is a single line comment
+
+/*
+Here we
+have multiple comments
+on multiple lines
+*/
+```
+
