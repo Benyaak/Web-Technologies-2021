@@ -29,9 +29,9 @@ f. First class functions - This means the language supports passing functions as
 
 There are 3 ways to declare a JavaScript variable:
 
-Using **var***
-Using **let**
-Using **const**
+- Using **var**
+- Using **let**
+- Using **const**
 
 ### Data types used in Javascript
 
