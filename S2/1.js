@@ -31,9 +31,21 @@ function concatStringsC(arrayOfStrings) {
     return result;
 }
 
+// Example 4
+
+const concatStringsD = (arrayOfStrings) => {
+    let result = '';
+    arrayOfStrings.forEach((string) => {
+        result += string;
+    });
+
+    return result;
+}
+
 // Note: You can use any of the FOR structure versions, it doesn't matter.
 strings = ['Ana ', 'owns ', 'the shop.'];
 
 console.log(concatStringsA(strings));
 console.log(concatStringsB(strings));
 console.log(concatStringsC(strings));
+console.log(concatStringsD(strings));
