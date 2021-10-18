@@ -1,4 +1,4 @@
-## LAB 3 - Functions and Arrays - Work in progress
+## LAB 3 - Functions and Arrays
 
 In this session we had the opportunity to do some operations with functions and arrays. Both of them are a baseline for the course, since most of the work that we do
 is based on the them.
@@ -138,6 +138,90 @@ cars.splice(1, 1); // Removes the 'Mazda' element since it's on the position 1 i
 // The array is now  ['Honda', 'BMW', 'Mercedes Benz']
 ```
 
+- Reduce an array
 
+The ```reduce()``` method executes a user-supplied “reducer” callback function on each element of the array, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value.
 
+Perhaps the easiest-to-understand case for reduce() is to return the sum of all the elements in an array.
+
+```javascript
+const array = [1, 2, 3, 4];
+const reducer = (previousValue, currentValue) => previousValue + currentValue;
+
+// 1 + 2 + 3 + 4
+console.log(array.reduce(reducer));
+// expected output: 10
+
+// 5 + 1 + 2 + 3 + 4
+console.log(array.reduce(reducer, 5));
+// expected output: 15
+```
+
+- Map an array
+
+The ```map()``` method creates a new array populated with the results of calling a provided function on every element in the calling array.
+
+```javascript
+const array = [1, 4, 9, 16];
+
+// pass a function to map
+const map = array.map(x => x * 2);
+
+console.log(map);
+// expected output: Array [2, 8, 18, 32]
+```
+
+- Reverse an array
+
+The ```reverse()``` method reverses an array in place. The first array element becomes the last, and the last array element becomes the first.
+
+```javascript
+const array = ['one', 'two', 'three'];
+console.log('array:', array);
+// expected output: "array:" Array ["one", "two", "three"]
+
+const reversed = array.reverse();
+console.log('reversed:', reversed);
+// expected output: "reversed:" Array ["three", "two", "one"]
+
+// Careful: reverse is destructive -- it changes the original array.
+console.log('array:', array);
+// expected output: "array:" Array ["three", "two", "one"]
+```
+
+- Sort an array
+
+The ```sort()``` method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+
+The time and space complexity of the sort cannot be guaranteed as it depends on the implementation.
+
+```javascript
+const months = ['March', 'Jan', 'Feb', 'Dec'];
+months.sort();
+console.log(months);
+// expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+const array = [1, 30, 4, 21, 100000];
+array.sort();
+console.log(array);
+// expected output: Array [1, 100000, 21, 30, 4]
+```
+
+- Flat & Flat Map an array
+
+The ```flat()``` method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+
+```javascript
+const array = [0, 1, 2, [3, 4]];
+
+console.log(array.flat());
+// expected output: [0, 1, 2, 3, 4]
+
+const array2 = [0, 1, 2, [[[3, 4]]]];
+
+console.log(array2.flat(2));
+// expected output: [0, 1, 2, [3, 4]]
+```
+
+The ```flatMap()``` method returns a new array formed by applying a given callback function to each element of the array, and then flattening the result by one level. It is identical to a map() followed by a flat() of depth 1, but slightly more efficient than calling those two methods separately.
 
