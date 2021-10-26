@@ -1,0 +1,19 @@
+{
+  "name": "3",
+  "version": "1.0.0",
+  "description": "LAB 5-3",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "LAB5"
+  ],
+  "author": "Dan Andrei Ghinea",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
