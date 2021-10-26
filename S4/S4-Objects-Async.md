@@ -70,6 +70,104 @@ const room = new Room(10, 10);
 console.log(room.area); // The result will be 100
 ```
 
+### Promises
+
+The **Promise** object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action's eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.
+
+A Promise is in one of these states:
+
+- pending: initial state, neither fulfilled nor rejected.
+- fulfilled: meaning that the operation was completed successfully.
+- rejected: meaning that the operation failed.
+
+A pending promise can either be fulfilled with a value or rejected with a reason (error). When either of these options happens, the associated handlers queued up by a promise's then method are called. If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.
+
+As the Promise.prototype.then() and Promise.prototype.catch() methods return promises, they can be chained.
+
+![promises structure](./promises.png)
+
+### Chained promises
+
+The methods promise.then(), promise.catch(), and promise.finally() are used to associate further action with a promise that becomes settled.
+
+The .then() method takes up to two arguments; the first argument is a callback function for the resolved case of the promise, and the second argument is a callback function for the rejected case. Each .then() returns a newly generated promise object, which can optionally be used for chaining; for example:
+
+```javascript
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('foo');
+  }, 300);
+});
+
+myPromise
+  .then(handleResolvedA, handleRejectedA)
+  .then(handleResolvedB, handleRejectedB)
+  .then(handleResolvedC, handleRejectedC);
+```
+
+Processing continues to the next link of the chain even when a .then() lacks a callback function that returns a Promise object. Therefore, a chain can safely omit every rejection callback function until the final .catch().
+
+Handling a rejected promise in each .then() has consequences further down the promise chain. Sometimes there is no choice, because an error must be handled immediately. In such cases we must throw an error of some type to maintain error state down the chain. On the other hand, in the absence of an immediate need, it is simpler to leave out error handling until a final .catch() statement. A .catch() is really just a .then() without a slot for a callback function for the case when the promise is resolved.
+
+```javascript
+myPromise
+.then(handleResolvedA)
+.then(handleResolvedB)
+.then(handleResolvedC)
+.catch(handleRejectedAny);
+```
+
+Using Arrow Function Expressions for the callback functions, an implementation of a promise chain might look something like this:
+
+```javascript
+promise1
+.then(value => { return value + ' and bar'; })
+.then(value => { return value + ' and bar again'; })
+.then(value => { return value + ' and again'; })
+.then(value => { return value + ' and again'; })
+.then(value => { console.log(value) })
+.catch(err => { console.log(err) });
+```
+
+The termination condition of a promise determines the "settled" state of the next promise in the chain. A "resolved" state indicates a successful completion of the promise, while a "rejected" state indicates a lack of success. The return value of each resolved promise in the chain is passed along to the next .then(), while the reason for rejection is passed along to the next rejection-handler function in the chain.
+
+The promises of a chain are nested like Russian dolls, but get popped like the top of a stack. The first promise in the chain is most deeply nested and is the first to pop.
+
+```
+(promise D, (promise C, (promise B, (promise A) ) ) )
+```
+
+When a nextValue is a promise, the effect is a dynamic replacement. The return causes a promise to be popped, but the nextValue promise is pushed into its place. For the nesting shown above, suppose the .then() associated with "promise B" returns a nextValue of "promise X". The resulting nesting would look like this:
+
+```
+(promise D, (promise C, (promise X) ) )
+```
+
+A promise can participate in more than one nesting. For the following code, the transition of promiseA into a "settled" state will cause both instances of .then() to be invoked.
+
+```javascript
+const promiseA = new Promise(myExecutorFunc);
+const promiseB = promiseA.then(handleFulfilled1, handleRejected1);
+const promiseC = promiseA.then(handleFulfilled2, handleRejected2);
+```
+
+An action can be assigned to an already "settled" promise. In that case, the action (if appropriate) will be performed at the first asynchronous opportunity. Note that promises are guaranteed to be asynchronous. Therefore, an action for an already "settled" promise will occur only after the stack has cleared and a clock-tick has passed. The effect is much like that of setTimeout(action,10).
+
+```javascript
+const promiseA = new Promise( (resolutionFunc,rejectionFunc) => {
+    resolutionFunc(777);
+});
+// At this point, "promiseA" is already settled.
+promiseA.then( (val) => console.log("asynchronous logging has val:",val) );
+console.log("immediate logging");
+
+// produces output in this order:
+// immediate logging
+// asynchronous logging has val: 777
+```
+
 ### The basics of async/await
 
 There are two parts to using async/await in your code.
