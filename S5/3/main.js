@@ -57,6 +57,11 @@ app.use(bodyParser.json());
  */
 app.use(cors());
 
+/**
+ * Create a middleware for the express router.
+ * Basically the root for all the requests starts from localhost:3000/
+ * Port is 3000 since I declared and initialised it above on line 28.
+ */
 app.use('/', router);
 
 /**
