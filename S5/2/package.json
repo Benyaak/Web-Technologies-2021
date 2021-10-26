@@ -1,0 +1,17 @@
+{
+  "name": "lab-5-2",
+  "version": "1.0.0",
+  "description": "LAB 5 - Exercise 2",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "LAB5"
+  ],
+  "author": "Dan Andrei Ghinea",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
