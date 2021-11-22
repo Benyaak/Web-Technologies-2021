@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 200px;
+    background-color: cadetblue;
+}
+
+.content {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    height: 200px;
+    background-color: crimson;
+}
+
+.main-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: darkgrey;
+}
+
+.content-pane {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: darkkhaki;
+}
+
+.content-zone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    background-color: darksalmon;
+}

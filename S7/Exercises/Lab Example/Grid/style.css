@@ -1,0 +1,47 @@
+body {
+    display: grid;
+    grid-template-rows: 200px 100% 200px;
+}
+
+.header {
+    background-color: cadetblue;
+}
+
+.content {
+    display: grid;
+    grid-template-rows: 10% 90%;
+}
+
+.footer {
+    background-color: crimson;
+}
+
+.main-navigation {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+}
+
+.content-pane {
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+
+.sidebar {
+    display: grid;
+    grid-auto-rows: 32px;
+    background-color: darkkhaki;
+}
+
+.sidebar-item {
+    background-color: darkseagreen;
+}
+
+.sidebar-item:hover {
+    background-color: deepskyblue;
+}
+
+.content-zone {
+    background-color: darksalmon;
+}
