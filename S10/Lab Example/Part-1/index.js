@@ -107,13 +107,59 @@ app.post("/universities/:universityId/students", async (req, res, next) => {
     const university = await University.findByPk(req.params.universityId);
     if (university) {
       const student = new Student(req.body);
-      console.log('HERE', university);
-      console.log('HERE2', student);
-      student.universityId = university.universityId;
+      student.universityId = university.id;
       await student.save();
       res.status(201).json({ message: "Student created" });
     } else {
       res.status(404).json({ message: "404 - University Not Found!" });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * PUT to update a student from a university.
+ */
+app.put('/universities/:universityId/students/:studentId', async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId)
+    if (university) {
+      const students = await university.getStudents({ id: req.params.studentId })
+      const student = students.shift()
+      if (student) {
+        student.studentFullName = req.body.fullName
+        student.studentStatus = req.body.status
+        await student.save()
+        res.status(202).json({ message: 'Student updated!'})
+      } else {
+        res.status(404).json({ message: '404 - Student Not Found!' })
+      }
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!' })
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * DELETE a student from a university.
+ */
+app.delete('/universities/:universityId/students/:studentId', async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId)
+    if (university) {
+      const students = await university.getStudents({ id: req.params.studentId })
+      const student = students.shift()
+      if (student) {
+        await student.destroy()
+        res.status(202).json({ message: 'Student deleted!'})
+      } else {
+        res.status(404).json({ message: '404 - Student Not Found' })
+      }
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!' })
     }
   } catch (err) {
     next(err);
