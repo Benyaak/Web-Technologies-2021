@@ -102,7 +102,7 @@ app.get("/universities/:universityId/students", async (req, res, next) => {
 /**
  * POST a new student into a university.
  */
- app.post("/universities/:universityId/students", async (req, res, next) => {
+app.post("/universities/:universityId/students", async (req, res, next) => {
   try {
     const university = await University.findByPk(req.params.universityId);
     if (university) {
@@ -119,7 +119,23 @@ app.get("/universities/:universityId/students", async (req, res, next) => {
 });
 
 /**
- * IMPLEMENT GET STUDENT BY studentId FROM A SPECIFIC UNIVERSITY(/universities/:universityId/students/:studentId) BELOW
+ * GET a student by id from a university by id.
  */
-
-
+app.get('/universities/:universityId/students/:studentId', async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId)
+    if (university) {
+      const students = await university.getStudents({ id: req.params.studentId })
+      const student = students.shift()
+      if (student) {
+        res.status(202).json(student)
+      } else {
+        res.status(404).json({ message: '404 - Student Not Found!' })
+      }
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!' })
+    }
+  } catch (err) {
+    next(err);
+  }
+});

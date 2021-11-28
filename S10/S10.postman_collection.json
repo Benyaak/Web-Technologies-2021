@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "e490edbe-e8a9-4ba0-8948-2622d4fe5557",
+		"name": "S10",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[GET] ALL STUDENTS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"students"
+					]
+				},
+				"description": "Return all the existing students in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] ADD A STUDENT TO A UNIVERSITY",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"studentFullName\": \"Popescu Laurentiu\",\n\t\"studentStatus\": \"ACTIVE\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/universities/1/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities",
+						"1",
+						"students"
+					]
+				},
+				"description": "Add a new student to a existing university in the database."
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] CREATE/REFRESH THE DATABASE",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"create"
+					]
+				},
+				"description": "CREATE/WIPE-OUT THE DATABASE"
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] ALL THE UNIVERSITIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/universities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities"
+					]
+				},
+				"description": "Get all the universities from the database"
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] CREATE A UNIVERSITY",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"universityName\": \"CIG\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/university",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"university"
+					]
+				},
+				"description": "Add a university to the database"
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] THE STUDENTS OF A SPECIFIC UNIVERSITY",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/universities/1/students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities",
+						"1",
+						"students"
+					]
+				},
+				"description": "Get the students of a given university identifier"
+			},
+			"response": []
+		},
+		{
+			"name": "[PUT] TO UPDATE A STUDENT FROM A UNIVERSITY",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullName\": \"Dan Andrei\",\n    \"status\": \"INACTIVE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/universities/1/students/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities",
+						"1",
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DELETE] A STUDENT FROM A UNIVERSITY",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/universities/1/students/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities",
+						"1",
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] A STUDENT FROM A PARTICULAR UNIVERSITY BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/universities/1/students/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"universities",
+						"1",
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
