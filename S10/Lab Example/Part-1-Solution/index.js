@@ -102,7 +102,7 @@ app.get("/universities/:universityId/students", async (req, res, next) => {
 /**
  * POST a new student into a university.
  */
- app.post("/universities/:universityId/students", async (req, res, next) => {
+app.post("/universities/:universityId/students", async (req, res, next) => {
   try {
     const university = await University.findByPk(req.params.universityId);
     if (university) {
@@ -117,9 +117,3 @@ app.get("/universities/:universityId/students", async (req, res, next) => {
     next(err);
   }
 });
-
-/**
- * IMPLEMENT GET STUDENT BY studentId FROM A SPECIFIC UNIVERSITY(/universities/:universityId/students/:studentId) BELOW
- */
-
-
