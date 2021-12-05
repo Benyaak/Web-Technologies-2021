@@ -10,9 +10,6 @@ const sequelize = require("./sequelize");
 const University = require("./models/university");
 const Student = require("./models/student");
 
-// Define entities relationship
-University.hasMany(Student);
-
 // Express middleware
 app.use(
   express.urlencoded({
@@ -20,6 +17,9 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Define the model relationship.
+University.hasMany(Student);
 
 // Kickstart the Express aplication
 app.listen(port, () => {
@@ -63,7 +63,7 @@ app.get("/universities", async (req, res, next) => {
 app.post("/university", async (req, res, next) => {
   try {
     await University.create(req.body);
-    res.status(201).json({ message: "Univeristy Created!" });
+    res.status(201).json({ message: "University Created!" });
   } catch (err) {
     next(err);
   }
@@ -82,24 +82,64 @@ app.get("/students", async (req, res, next) => {
 });
 
 /**
- * GET a specific university's students.
+ * POST a new student into a university.
  */
-app.get("/universities/:universityId/students", async (req, res, next) => {
+app.post("/universities/:universityId/students", async (req, res, next) => {
   try {
-    const university = await University.findByPk(req.params.universityId, {
-      include: [Student],
-    });
+    const university = await University.findByPk(req.params.universityId);
     if (university) {
-      res.status(200).json(university.students);
+      const student = new Student(req.body);
+      student.universityId = university.id;
+      await student.save();
+      res.status(201).json({ message: 'Student crated!'});
     } else {
-      res.status(404).json({ message: "404 - University Not Found!" });
+      res.status(404).json({ message: '404 - University Not Found'});
     }
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 });
 
 /**
- * IMPLEMENT POST METHOD BELOW
+ * GET all the students from a university using include.
  */
-  
+app.get("/universities/:universityId/students", async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId, {
+      include: [Student]
+    });
+    if (university) {
+      res.status(200).json(university.students);
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!'});
+    }
+  } catch(error) {
+    next(error);
+  }
+});
+
+/**
+ * PUT in order to update a student from a university.
+ */
+app.put("/universities/:universityId/students/:studentId", async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId);
+    if (university) {
+      const stundents = await university.getStudents({ id: req.params.studentId });
+      const student = stundents.shift();
+      if (student) {
+        student.studentFullName = req.body.fullName;
+        student.studentStatus = req.body.status;
+        await student.save();
+        res.status(202).json({ message: 'Student updated!' });
+      } else {
+        res.status(404).json({ message: '404 - Student Not Found!'});
+      }
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!'});
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
